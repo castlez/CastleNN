@@ -6,10 +6,12 @@ import org.junit.Test;
  */
 
 public class TestNN {
+    
+    //ensure the neural networks can be constructed
     @Test
     public void test_ConstructNN(){
         try {
-            NeuralNet nn;
+            NeuralNet nn = new NeuralNet(3, 3, 1, 3, null);
         } catch (Exception e) {
             throw new AssertionError(e.getMessage());
         }
