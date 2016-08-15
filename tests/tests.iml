@@ -18,6 +18,6 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" scope="RUNTIME" name="src" level="project" />
+    <orderEntry type="module" module-name="NeuralNet" exported="" />
   </component>
 </module>
