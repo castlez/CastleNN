@@ -62,7 +62,7 @@ public class NeuralNet {
                 inputs = outputs;
             }
 
-            outputs.clear();
+            outputs = new Vector<Double>();;
 
             cWeight = 0;
 
@@ -98,6 +98,4 @@ public class NeuralNet {
     // originally Double Sigmoid(Double activation, Double response)
     // pretty sure the second argument is always 1 for most cases
     Double Sigmoid(Double activation){return 1/(1 + Math.pow(Math.E, (-1)*activation));}
-
-
 }
