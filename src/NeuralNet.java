@@ -27,23 +27,18 @@ public class NeuralNet {
         this.vecLayers = vecLayers;
     }
 
-    void createNet(){
-        //Todo: Implement
-    }
+    //void createNet(){}
 
-    Vector<Double> getWeights(){
-        //Todo: Implement
-        return null;
-    }
+    //Vector<Double> getWeights(){}
     //returns the total number of weights in the net
 
-    Integer GetNumberOfWeights(){return 0;}//Todo: Implement
+    //Integer GetNumberOfWeights(){return 0;}//Todo: Implement
 
 
 
     //replaces the weights with new ones
 
-    void PutWeights(Vector<Double> weights){}//Todo: Implement
+    //void PutWeights(Vector<Double> weights){}//Todo: Implement
 
 
 
@@ -51,7 +46,7 @@ public class NeuralNet {
     Vector<Double> Update(Vector<Double> inputs){
 
         //stores the resultant outputs from each layer
-        Vector<Double> outputs = null;
+        Vector<Double> outputs = new Vector<Double>();
 
         Integer cWeight = 0;
 

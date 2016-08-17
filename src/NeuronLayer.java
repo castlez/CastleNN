@@ -12,9 +12,12 @@ public class NeuronLayer {
     Vector<Neuron> vecNeurons;
 
     NeuronLayer(Integer numNeurons, Integer inputsPerNeuron){
+        vecNeurons = new Vector<Neuron>();
+        this.numNeurons = numNeurons;
         for (int i = 0; i < numNeurons;i++){
             vecNeurons.add(new Neuron(inputsPerNeuron));
         }
+
     }
 
 }

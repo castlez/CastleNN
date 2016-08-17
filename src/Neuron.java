@@ -14,6 +14,8 @@ public class Neuron {
 
     //initialize all weights to random values
     Neuron(Integer numInputs) {
+        vecWeights = new Vector<>();
+        this.numInputs = numInputs;
         for(int i = 0; i <numInputs+1;i++) {
             vecWeights.add(new Random().nextDouble());
         }
