@@ -1,3 +1,4 @@
+import java.util.Arrays;
 import java.util.Vector;
 
 /**
@@ -11,14 +12,42 @@ public class NueroTrainer {
     public static void main(String [] args){
         NeuralNet nn = new NeuralNet(2, 1, 1, 3, null);
         nn.init3Layer();
-        //nn = initNN(nn);
-        //nn = testGetWeightsFromNeuralNet(nn);
+
+        //construct training set
+        Double [][] inps = new Double[4][];
+        Double[] outs    = new Double[4];
+        inps[0] = new Double[]{1.0, 0.0};
+        outs[0] = 1.0;
+        inps[1] = new Double[]{0.0, 1.0};
+        outs[1] = 1.0;
+        inps[2] = new Double[]{1.0, 1.0};
+        outs[2] = 1.0;
+        inps[3] = new Double[]{0.0, 0.0};
+        outs[3] = 0.0;
+
+        //train the neural net
+        nn = train(nn, inps, outs);
+        //test the neural net
+        Vector<Double> inputs = new Vector<>();
+        inputs.add(1.0);
+        inputs.add(0.0);
+        Vector<Double> ans = nn.feedforward(inputs);
+        System.out.println("with an input of: " + inputs.toString() + "\nthe neural net guessed: " + ans);
     }
 
-    public static void train(Vector<Double> trainingset, Vector<Double> solns){
-        System.out.println("trainging set: " + trainingset.toString());
-        System.out.println("Solution set:" + solns.toString());
+    private static NeuralNet train(NeuralNet nn, Double[][] inps, Double[] outs) {
+        Vector<Double> input = new Vector(Arrays.asList(inps[0]));
+        Vector<Double> exact= new Vector(Arrays.asList(outs[0]));
+
+        System.out.println("TRAINING Input: " + input.toString());
+        System.out.println("TRAINING Expected: " + exact.toString());
+        Vector<Double> approx = nn.feedforward(input);
+        System.out.println("TRAINING Actual: " + approx.toString());
+        System.out.println("TRAINING Error: " + (approx.get(0) - exact.get(0)));
+        return nn;
     }
+
+
 
     public static NeuralNet testGetWeightsFromNeuralNet(NeuralNet nn){
         System.out.println("number of weights: " + nn.GetNumberOfWeights());
@@ -49,7 +78,7 @@ public class NueroTrainer {
             input.add(0.1);
 
             //update
-            nn.Update(input);
+            nn.feedforward(input);
             System.out.println("###UPDATED###");
             System.out.println(nn.toString());
 

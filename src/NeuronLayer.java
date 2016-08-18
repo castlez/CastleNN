@@ -45,7 +45,7 @@ public class NeuronLayer {
         for (Neuron n : vecNeurons) {
             Vector<Double> tempw = new Vector<Double>();
             for (int i = 0; i < n.getWeights().size();i++) { //might want to find a better way to do this
-                tempw.add(weights.remove(0));
+                tempw.add(weights.get(i));
             }
             n.putWeights(tempw);
         }

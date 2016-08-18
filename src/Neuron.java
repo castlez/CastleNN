@@ -40,4 +40,12 @@ public class Neuron {
     public void putWeights(Vector<Double> weights) {
         vecWeights = weights;
     }
+
+    public Double activate(Vector<Double> inputs){
+        Double output = 0.0;
+        for (int i = 0; i < inputs.size(); ) {
+            output += inputs.get(i) * vecWeights.get(i);
+        }
+        return output;
+    }
 }
