@@ -1,12 +1,15 @@
 // this is the neural net class 
 // // TODO: 8/15/2016  will be updated as the methods are needed
 
+import java.util.StringJoiner;
 import java.util.Vector;
 import java.util.regex.Matcher;
 
 /**
  * Created by Jonny on 8/15/2016.
+ * Manages the neural net
  */
+
 public class NeuralNet {
 
     private Integer numInputs;
@@ -27,18 +30,37 @@ public class NeuralNet {
         this.vecLayers = vecLayers;
     }
 
-    //void createNet(){}
+    //void createNet(){} do i need this?
 
-    //Vector<Double> getWeights(){}
+    Vector<Double> getWeights(){
+        Vector<Double> myweights = new Vector<Double>();
+        for (NeuronLayer layer : vecLayers) {
+            myweights.addAll(layer.getWeights());
+        }
+        return myweights;
+    }
+
     //returns the total number of weights in the net
-
-    //Integer GetNumberOfWeights(){return 0;}//Todo: Implement
+    Integer GetNumberOfWeights(){
+        Integer numweights = 0;
+        for (NeuronLayer nl : vecLayers) {
+            numweights += nl.getWeights().size();
+        }
+        return numweights;
+    }
 
 
 
     //replaces the weights with new ones
-
-    //void PutWeights(Vector<Double> weights){}//Todo: Implement
+    void putWeights(Vector<Double> weights){
+        for (NeuronLayer nl : vecLayers) {
+            Vector<Double> tempw = new Vector<Double>();
+            for (int i = 0; i < nl.getWeights().size()/nl.numNeurons;i++) { //might want to find a better way to do this
+                tempw.add(weights.remove(0));
+            }
+            nl.putWeights(tempw);
+        }
+    }
 
 
 
@@ -92,7 +114,17 @@ public class NeuralNet {
         return outputs;
     }
 
-
+    @Override
+    public String toString(){
+        if (vecLayers.size() < 1) {
+            return "empty neural net";
+        }
+        String outString = vecLayers.get(0).toString();
+        for (int i = 1; i < vecLayers.size(); i++) {
+            outString += "\n\n" + vecLayers.get(i).toString();
+        }
+        return outString;
+    }
 
     //sigmoid response curve
     // originally Double Sigmoid(Double activation, Double response)
