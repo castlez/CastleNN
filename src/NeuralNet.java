@@ -22,15 +22,29 @@ public class NeuralNet {
 
     private Vector<NeuronLayer> vecLayers;
 
+    //if you pass null in for vecLayers, you must call init to build the neural network
     public NeuralNet(Integer numInputs, Integer numOutputs, Integer numHiddenLayers, Integer numNeuronsPerHiddenLyr, Vector<NeuronLayer> vecLayers) {
         this.numInputs = numInputs;
         this.numOutputs = numOutputs;
         this.numHiddenLayers = numHiddenLayers;
         this.numNeuronsPerHiddenLyr = numNeuronsPerHiddenLyr;
-        this.vecLayers = vecLayers;
+        this.vecLayers = vecLayers!=null ? vecLayers : new Vector<NeuronLayer>();
     }
 
-    //void createNet(){} do i need this?
+    //initializes a 3 layer neural net
+    public void init3Layer() {
+        //create input layer
+        NeuronLayer templayer = new NeuronLayer(numInputs, 1);
+        vecLayers.add(templayer);
+
+        //the hidden layer
+        templayer = new NeuronLayer(numNeuronsPerHiddenLyr, numInputs);
+        vecLayers.add(templayer);
+
+        //output layer
+        templayer = new NeuronLayer(numOutputs, numNeuronsPerHiddenLyr);
+        vecLayers.add(templayer);
+    }
 
     Vector<Double> getWeights(){
         Vector<Double> myweights = new Vector<Double>();
@@ -130,4 +144,6 @@ public class NeuralNet {
     // originally Double Sigmoid(Double activation, Double response)
     // pretty sure the second argument is always 1 for most cases
     Double Sigmoid(Double activation){return 1/(1 + Math.pow(Math.E, (-1)*activation));}
+
+
 }

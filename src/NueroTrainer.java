@@ -2,17 +2,22 @@ import java.util.Vector;
 
 /**
  * Created by Jonny on 8/15/2016.
- * disgusting test file
+ * Trainer and test file for binary logical operators
  */
 
-public class TestNN {
+public class NueroTrainer {
     
-    //ensure the neural networks can be constructed, updated, and outputted
-    //then runs some other test on the constructed neural net (refactor this)
+
     public static void main(String [] args){
-        NeuralNet nn = new NeuralNet(3, 3, 1, 3, null);
-        nn = testNNinitupdateoutput(nn);
-        nn = testGetWeightsFromNeuralNet(nn);
+        NeuralNet nn = new NeuralNet(2, 1, 1, 3, null);
+        nn.init3Layer();
+        //nn = initNN(nn);
+        //nn = testGetWeightsFromNeuralNet(nn);
+    }
+
+    public static void train(Vector<Double> trainingset, Vector<Double> solns){
+        System.out.println("trainging set: " + trainingset.toString());
+        System.out.println("Solution set:" + solns.toString());
     }
 
     public static NeuralNet testGetWeightsFromNeuralNet(NeuralNet nn){
@@ -20,7 +25,7 @@ public class TestNN {
         return nn;
     }
 
-    public static NeuralNet testNNinitupdateoutput(NeuralNet nn){
+    public static NeuralNet initNN(NeuralNet nn){
         try {
             // make 3 layers with 3 inputs each
             Vector<NeuronLayer> layers = new Vector<NeuronLayer>();
