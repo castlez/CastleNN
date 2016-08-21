@@ -28,11 +28,11 @@ public class NueroTrainer {
         //train the neural net
         nn = train(nn, inps, outs);
         //test the neural net
-        Vector<Double> inputs = new Vector<>();
-        inputs.add(1.0);
-        inputs.add(0.0);
-        Vector<Double> ans = nn.feedforward(inputs);
-        System.out.println("with an input of: " + inputs.toString() + "\nthe neural net guessed: " + ans);
+//        Vector<Double> inputs = new Vector<>();
+//        inputs.add(1.0);
+//        inputs.add(0.0);
+//        Vector<Double> ans = nn.feedforward(inputs);
+//        System.out.println("with an input of: " + inputs.toString() + "\nthe neural net guessed: " + ans);
     }
 
     private static NeuralNet train(NeuralNet nn, Double[][] inps, Double[] outs) {
