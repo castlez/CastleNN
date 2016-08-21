@@ -1,2 +1,6 @@
 .idea/
 out
+src/NeuralNet.class
+src/Neuron.class
+src/NeuronLayer.class
+src/NueroTrainer.class
