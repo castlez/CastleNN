@@ -43,7 +43,7 @@ public class Neuron {
 
     public Double activate(Vector<Double> inputs){
         Double output = 0.0;
-        for (int i = 0; i < inputs.size(); ) {
+        for (int i = 0; i < inputs.size(); i++) {
             output += inputs.get(i) * vecWeights.get(i);
         }
         return output;
