@@ -7,7 +7,8 @@ import java.util.Vector;
  */
 
 public class NueroTrainer {
-    
+
+    private static int trainingReps = 10000;
 
     public static void main(String [] args){
         NeuralNet nn = new NeuralNet(2, 1, 1, 3, null);
@@ -39,11 +40,15 @@ public class NueroTrainer {
         Vector<Double> input = new Vector(Arrays.asList(inps[0]));
         Vector<Double> exact= new Vector(Arrays.asList(outs[0]));
 
-        System.out.println("TRAINING Input: " + input.toString());
-        System.out.println("TRAINING Expected: " + exact.toString());
-        Vector<Double> approx = nn.feedforward(input);
-        System.out.println("TRAINING Actual: " + approx.toString());
-        System.out.println("TRAINING Error: " + (approx.get(0) - exact.get(0)));
+        for (int epoch = 0; epoch < trainingReps;epoch++) {
+            System.out.println("TRAINING Input: " + input.toString());
+            System.out.println("TRAINING Expected: " + exact.toString());
+            Vector<Double> approx = nn.feedforward(input);
+            nn = nn.backprop(input,approx,exact);
+            System.out.println("TRAINING Actual: " + approx.toString());
+            System.out.println("TRAINING Error: " + (approx.get(0) - exact.get(0)));
+        }
+
         return nn;
     }
 

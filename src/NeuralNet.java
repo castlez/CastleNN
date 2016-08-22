@@ -94,7 +94,7 @@ public class NeuralNet {
                 sum += vecLayers.get(1).vecNeurons.get(k).activate(inputs);
             }
             //add bias
-            sum += vecLayers.get(1).vecNeurons.get(i).vecWeights.get(vecLayers.get(0).vecNeurons.get(i).vecWeights.size()-1);
+            sum += vecLayers.get(1).vecNeurons.get(i).vecWeights.get(vecLayers.get(1).vecNeurons.get(i).vecWeights.size()-1);
             //vecLayers.get(1).vecNeurons.get(i).activate(inputs)
             inhid.add(Sigmoid(sum));
         }
@@ -102,8 +102,8 @@ public class NeuralNet {
         //hidden to out layer
         for (int i = 0; i < numOutputs; i++) {
             sum = 0.0;
-            for (int k = 0; k < numNeuronsPerHiddenLyr; i++) {
-                sum += inhid.get(i) * vecLayers.get(numHiddenLayers+1).vecNeurons.get(i).vecWeights.get(k);
+            for (int k = 0; k < numNeuronsPerHiddenLyr; k++) {
+                sum += vecLayers.get(1).vecNeurons.get(k).activate(inhid);
             }
             int sweights = vecLayers.get(numHiddenLayers+1).vecNeurons.get(i).vecWeights.size();
             sum += vecLayers.get(numHiddenLayers+1).vecNeurons.get(i).vecWeights.get(sweights-1);
@@ -136,11 +136,11 @@ public class NeuralNet {
 
         // Update the weights for the output layer
         for (int i = 0; i < numOutputs; i++) {
-            for (int k = 0; k<numNeuronsPerHiddenLyr; i++) {
+            for (int k = 0; k<numNeuronsPerHiddenLyr; k++) {
                 vecLayers.get(numHiddenLayers+1).vecNeurons.get(i).vecWeights.set(k,
                             learningRate *
                             erro.get(i) *
-                            vecLayers.get(numNeuronsPerHiddenLyr+1).vecNeurons.get(i).activate(inputs)
+                            vecLayers.get(2).vecNeurons.get(i).activate(inputs)
                 );
                 //update bias
                 vecLayers.get(numHiddenLayers+1).vecNeurons.get(i).vecWeights.set(numNeuronsPerHiddenLyr,
@@ -151,14 +151,14 @@ public class NeuralNet {
 
         // Update the weights for the hidden layer
         for (int i = 0; i < numNeuronsPerHiddenLyr; i++) {
-            for (int k = 0; k<numInputs;i++) {
+            for (int k = 0; k<numInputs;k++) {
                 vecLayers.get(numHiddenLayers).vecNeurons.get(i).vecWeights.set(k,
                         learningRate *
                         errh.get(i) *
-                        vecLayers.get(numNeuronsPerHiddenLyr+1).vecNeurons.get(i).activate(inputs)
+                        vecLayers.get(1).vecNeurons.get(i).activate(inputs)
                 );
                 //update bias
-                vecLayers.get(numInputs).vecNeurons.get(i).vecWeights.set(numNeuronsPerHiddenLyr,
+                vecLayers.get(1).vecNeurons.get(i).vecWeights.set(numNeuronsPerHiddenLyr-1,
                         learningRate * errh.get(i)
                 );
             }
